@@ -1,0 +1,8 @@
+#CIT 470-0001 Project 3
+#Darci Guriel
+#Group 3: Austin Elkins, Alyssa Herrman, Lisa Stock
+
+           --------------
+==========| IN PROGRESS  |=====================
+           --------------
+
