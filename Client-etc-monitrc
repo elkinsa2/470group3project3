@@ -1,1 +1,13 @@
+# Client monitrc
+# CIT 470-0001 Project 3
+# Darci Guriel
+# Group 3: Austin Elkins, Alyssa Herrman, Lisa Stock
+
+# TO DO
+# Your solution must monitor the following critical capabilities on the four client machines:
+
+# ssh
+# syslog
+# LDAP client
+# NFS client
 
