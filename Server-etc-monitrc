@@ -1,1 +1,11 @@
+# Server monitrc
+
+# TO DO
+# Your solution must monitor your team server VM for the following services:
+
+# ssh
+# syslog
+# LDAP
+# NFS
+# Apache (httpd)
 
