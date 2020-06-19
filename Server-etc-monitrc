@@ -6,7 +6,7 @@
 # TO DO
 # Your solution must monitor your team server VM for the following services:
 
-#   ssh
+# x ssh
 # x syslog
 #   LDAP
 #   NFS
