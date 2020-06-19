@@ -5,3 +5,8 @@
 #Group 3: Austin Elkins, Alyssa Herrman, Lisa Stock
 
 # Script to test monitoring solution
+
+
+
+# line that kills syslog service
+cat /var/run/syslogd.pid | xargs kill
