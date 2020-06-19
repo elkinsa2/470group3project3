@@ -10,3 +10,7 @@
 
 # line that kills syslog service
 cat /var/run/syslogd.pid | xargs kill
+
+# line that kills sshd service
+cat /var/run/sshd.pid | xargs kill
+
