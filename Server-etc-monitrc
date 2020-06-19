@@ -10,7 +10,7 @@
 
 # x ssh
 # x syslog
-#   LDAP
+# x LDAP
 # x NFS
 # x Apache (httpd)
 
@@ -264,6 +264,12 @@ set httpd port 2812
   	   stop program  = "/usr/bin/systemctl stop nfs-server"
   	   if failed host 10.2.7.12 port 2049 type tcp for 2 cycles then restart
   	   if 2 restarts within 3 cycles then unmonitor
+    
+# Monit LDAP Server Monitoring
+   check process slapd with pidfile /var/run/openldap/slapd.pid
+      start program = "/usr/bin/systemctl start slapd"
+      stop program = "/usr/bin/systemctl stop slapd"
+      if failed host 10.2.7.12 port 389 protocol ldap3 then restart
  
 #
 ## Check filesystem permissions, uid, gid, space usage, inode usage and disk I/O.
