@@ -6,11 +6,11 @@
 # TO DO
 # Your solution must monitor your team server VM for the following services:
 
-# ssh
-# syslog
-# LDAP
-# NFS
-# Apache (httpd)
+#   ssh
+# x syslog
+#   LDAP
+#   NFS
+#   Apache (httpd)
 
 
 v file start v
