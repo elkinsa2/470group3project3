@@ -236,10 +236,17 @@ set httpd port 2812
 #    depends on apache_bin
 #    group server
 #
+
   check process syslogd with pidfile /var/run/syslogd.pid
       start program = "/usr/bin/systemctl start rsyslog"
       stop program = "/usr/bin/systemctl stop rsyslog"
       if 5 restarts within 5 cycles then timeout
+      
+  check process sshd with pidfile /var/run/sshd.pid
+      start program  "/usr/bin/systemctl start sshd"
+      stop program  "/usr/bin/systemctl stop sshd"
+      if failed port 22 protocol ssh then restart
+ 
 #
 ## Check filesystem permissions, uid, gid, space usage, inode usage and disk I/O.
 ## Other services, such as databases, may depend on this resource and an automatically
