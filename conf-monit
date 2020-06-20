@@ -15,7 +15,7 @@ yum install monit -y
 # MONIT CONFIG
 # Global - leaving set configs inline
 sed -i '/^set log syslog/a set logfile syslog facility log_daemon' /etc/monitrc
-sed -i 's/# set mailserver mail.bar.baz,/	 set mailserver 127.0.0.1/' /etc/monitrc 
+sed -i 's/# set mailserver mail.bar.baz,/  set mailserver 127.0.0.1/' /etc/monitrc 
 sed -i 's/# set alert sysadm@foo.bar/ set alert lmstock23@gmail.com /' /etc/monitrc 
 sed -i '/^ set alert lmstock23@gmail.com /a  set alert  root@localhost' /etc/monitrc
 
@@ -47,7 +47,7 @@ echo "     if cpu usage (user) > 80% for 4 cycles then alert" >> /etc/monitrc
 echo "     if cpu usage (system) > 20% for 4 cycles then alert" >> /etc/monitrc
 echo "     if cpu usage (wait) > 20% for 4 cycles then alert" >> /etc/monitrc
 echo "    " >> /etc/monitrc
-echo "	 check filesystem rootfs with path /dev/sda1" >> /etc/monitrc
+echo "  check filesystem rootfs with path /dev/sda1" >> /etc/monitrc
 echo "    if space usage > 80% for 5 times within 15 cycles then alert" >> /etc/monitrc
 echo "     " >> /etc/monitrc
 echo "   check filesystem varfs with path /dev/sda2" >> /etc/monitrc
@@ -56,13 +56,13 @@ echo "    " >> /etc/monitrc
 echo "   check filesystem homefs with path /dev/sda4" >> /etc/monitrc
 echo "     if space usage > 80% for 5 times within 15 cycles then alert  " >> /etc/monitrc
 echo "     " >> /etc/monitrc
-echo "	 check host stockl1Server.hh.nku.edu with address 10.2.7.12" >> /etc/monitrc
-echo "     if failed ping then alert" >> /etc/monitrc
-echo "		   if failed port 111 timeout 15 seconds then alert" >> /etc/monitrc
-echo "		   if failed port 20048 timeout 15 seconds then alert" >> /etc/monitrc
-echo "		   if failed port 2049 timeout 15 seconds then alert" >> /etc/monitrc
-echo "		   if failed port 389 timeout 15 seconds then alert" >> /etc/monitrc
-echo "		   if failed port 636 timeout 15 seconds then alert" >> /etc/monitrc
+echo "  check host stockl1Server.hh.nku.edu with address 10.2.7.12" >> /etc/monitrc
+echo "    if failed ping then alert" >> /etc/monitrc
+echo "    if failed port 111 timeout 15 seconds then alert" >> /etc/monitrc
+echo "    if failed port 20048 timeout 15 seconds then alert" >> /etc/monitrc
+echo "    if failed port 2049 timeout 15 seconds then alert" >> /etc/monitrc
+echo "    if failed port 389 timeout 15 seconds then alert" >> /etc/monitrc
+echo "    if failed port 636 timeout 15 seconds then alert" >> /etc/monitrc
 
 systemctl start monit
  # monit reload
