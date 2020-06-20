@@ -54,9 +54,6 @@ echo "     " >> /etc/monitrc
 echo "   check filesystem varfs with path /dev/sda2" >> /etc/monitrc
 echo "     if space usage > 80% for 5 times within 15 cycles then alert" >> /etc/monitrc
 echo "    " >> /etc/monitrc
-echo "   check filesystem homefs with path /dev/sda4" >> /etc/monitrc
-echo "     if space usage > 80% for 5 times within 15 cycles then alert  " >> /etc/monitrc
-echo "     " >> /etc/monitrc
 echo "  check host stockl1Server.hh.nku.edu with address $1" >> /etc/monitrc
 echo "    if failed ping then alert" >> /etc/monitrc
 echo "    if failed port 111 timeout 15 seconds then alert" >> /etc/monitrc
