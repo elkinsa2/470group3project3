@@ -33,12 +33,12 @@ echo "##########################################################################
 echo "## Group 3 Project 3 Configs" >> /etc/monitrc
 echo "###############################################################################" >> /etc/monitrc
 
-echo "      " >> /etc/monitrc
+echo "" >> /etc/monitrc
 echo "   check process sshd with pidfile /var/run/sshd.pid" >> /etc/monitrc
 echo "     start program  "/usr/bin/systemctl start sshd"" >> /etc/monitrc                     # <---- TEST FOR SYNTAX
 echo "     stop program  "/usr/bin/systemctl stop sshd"" >> /etc/monitrc
 echo "     if failed port 22 protocol ssh then restart" >> /etc/monitrc
-echo " " >> /etc/monitrc
+echo "" >> /etc/monitrc
 echo "   check system $2" >> /etc/monitrc
 echo "     if loadavg (5min) > 3 for 4 cycles then alert" >> /etc/monitrc
 echo "     if loadavg (15min) > 1 for 4 cycles then alert" >> /etc/monitrc
@@ -47,13 +47,13 @@ echo "     if swap usage > 20% for 4 cycles then alert" >> /etc/monitrc
 echo "     if cpu usage (user) > 80% for 4 cycles then alert" >> /etc/monitrc
 echo "     if cpu usage (system) > 20% for 4 cycles then alert" >> /etc/monitrc
 echo "     if cpu usage (wait) > 20% for 4 cycles then alert" >> /etc/monitrc
-echo "    " >> /etc/monitrc
+echo "" >> /etc/monitrc
 echo "  check filesystem rootfs with path /dev/sda1" >> /etc/monitrc
 echo "    if space usage > 80% for 5 times within 15 cycles then alert" >> /etc/monitrc
 echo "     " >> /etc/monitrc
 echo "   check filesystem varfs with path /dev/sda2" >> /etc/monitrc
 echo "     if space usage > 80% for 5 times within 15 cycles then alert" >> /etc/monitrc
-echo "    " >> /etc/monitrc
+echo "" >> /etc/monitrc
 echo "  check host stockl1Server.hh.nku.edu with address $1" >> /etc/monitrc
 echo "    if failed ping then alert" >> /etc/monitrc
 echo "    if failed port 111 timeout 15 seconds then alert" >> /etc/monitrc
@@ -62,6 +62,7 @@ echo "    if failed port 2049 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 389 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 636 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 514 timeout 15 seconds then alert" >> /etc/monitrc
+  
 
 systemctl start monit
 # monit reload
