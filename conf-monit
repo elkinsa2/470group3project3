@@ -76,3 +76,7 @@ sed -i 's/#$ModLoad imudp/$ModLoad imudp/' /etc/rsyslog.conf
 sed -i 's/#$UDPServerRun 514/$UDPServerRun 514/' /etc/rsyslog.conf
 sed -i 's/#$ModLoad imtcp/$ModLoad imtcp/' /etc/rsyslog.conf
 sed -i 's/#$InputTCPServerRun 514/$InputTCPServerRun 514/' /etc/rsyslog.conf
+
+firewall-cmd --zone=public --add-port=514/udp -–permanent
+firewall-cmd --reload
+
