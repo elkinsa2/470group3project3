@@ -14,3 +14,6 @@ cat /var/run/syslogd.pid | xargs kill
 # line that kills sshd service
 cat /var/run/sshd.pid | xargs kill
 
+# line from perm mon lab that fills up disk - may need more zeros for 8G /home
+dd if=/dev/zero of=/home/zero bs=512 count=10000000
+
