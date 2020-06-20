@@ -17,6 +17,9 @@ yum install epel-release -y
 yum install monit -y
 
 # MONIT CONFIG
+# Backup /etc/monitrc
+cp /etc/monitrc /etc/monitrc.BAK
+
 # Global - leaving set configs inline
 sed -i '/^set log syslog/a set logfile syslog facility log_daemon' /etc/monitrc
 sed -i 's/# set mailserver mail.bar.baz,/  set mailserver 127.0.0.1/' /etc/monitrc 
@@ -25,7 +28,8 @@ sed -i '/^ set alert lmstock23@gmail.com /a  set alert  root@localhost' /etc/mon
 
 # WEB MONIT - ON FOR TESTING - LIKELY REMOVE FOR SUBMISSION 
 sed -i 's/set httpd port 2812 and/set httpd port 2812   /' /etc/monitrc
-sed -i 's/    allow localhost/    allow 0.0.0.0\/0.0.0.0/' /etc/monitrc
+sed -i 's/set httpd port 2812 and/set httpd port 2812   /' /etc/monitrc
+sed -i 's/    use address localhost/    $2/' /etc/monitrc
 
 # Services - Appended to end of /etc/monitrc
 
@@ -64,7 +68,7 @@ echo "    if failed port 636 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 514 timeout 15 seconds then alert" >> /etc/monitrc
   
 
-systemctl start monit
+/usr/bin/systemctl start monit
 # monit reload
 
 # Opens Monit web console ports
