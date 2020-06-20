@@ -21,7 +21,7 @@ sed -i '/^ set alert lmstock23@gmail.com /a  set alert  root@localhost' /etc/mon
 
 # WEB MONIT - ON FOR TESTING - LIKELY REMOVE FOR SUBMISSION 
 sed -i 's/set httpd port 2812 and/set httpd port 2812   /' /etc/monitrc
-sed -i 's/    allow localhost/ #     allow 0.0.0.0/0.0.0.0/' /etc/monitrc
+sed -i 's/    allow localhost/ #     allow 0.0.0.0/0.0.0.0/' /etc/monitrc             # BROKEN
 
 # Services - Appended to end of /etc/monitrc
 
@@ -64,7 +64,13 @@ echo "		 if failed port 2049 timeout 15 seconds then alert" >> /etc/monitrc
 echo "		 if failed port 389 timeout 15 seconds then alert" >> /etc/monitrc
 echo "		 if failed port 636 timeout 15 seconds then alert" >> /etc/monitrc
 
-monit reload
+systemctl start monit
+ # monit reload
+
+# Opens Monit web console ports
+firewall-cmd --zone=public --add-port=2812/udp --permanent
+firewall-cmd --zone=public --add-port=2812/tcp --permanent
+firewall-cmd --reload
 
 
 # SYSLOG CONFIG
