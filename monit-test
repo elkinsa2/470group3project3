@@ -6,6 +6,26 @@
 
 # Script to test monitoring solution
 
+  # 2.5 min
+  # kill a service
+  # sleep 30
+  # verify alert ?  like echo monit summary ?
+  # repeat for services
+  
+  # 3 min
+  # close firewall port
+  # sleep 30
+  # verify alert
+  # open port
+  # repeat for ports
+  
+  # mayb 3 min
+  # fill disk
+  # verify alert
+  # stress cpu
+  # verify alert
+  # stress ram
+  # verify alert
 
 
 # line that kills syslog service
