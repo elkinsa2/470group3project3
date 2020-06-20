@@ -18,7 +18,7 @@ yum install monit -y
 
 # MONIT CONFIG
 # Backup /etc/monitrc
-cp /etc/monitrc /etc/monitrc.BAK
+cp /etc/monitrc /etc/monitrc.bak
 
 # Global - leaving set configs inline
 sed -i '/^set log syslog/a set logfile syslog facility log_daemon' /etc/monitrc
