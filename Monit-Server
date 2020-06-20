@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+####################
+# Group 3 - Alyssa Herrmann, Lisa Stock, Austin Elkins
+# Group 3
+# CIT-470-001 Summer 2020  Advanced Network & System Administration
+# Instructor: Darci Guriel
+# Monit Installation & Configuration Bash Script
+# Purpose: To perform the installation and initial configuration of Monit on our server.
+####################
+
+####################
+### Log all output from script: /var/log/monit-server ###
+####################
+LOGFILE=/var/log/monit-server
+function echo_and_log {
+    echo $1
+    echo $1 >> $LOGFILE 2>&1
+}
+
+echo_and_log "Installing monit..."
+./server-scripts/install-monit >> $LOGFILE 2>&1
+echo_and_log "Done..."
+
+echo_and_log "Installing & configuring mmonit..."
+./server-scripts/install-configure-mmonit >> $LOGFILE 2>&1
+echo_and_log "Done..."
+
+echo_and_log "Configuring monit clients..."
+./server-scripts/configure-monit-clients >> $LOGFILE 2>&1
+echo_and_log "Done..."
+
+echo_and_log "Configure monit server..."
+./server-scripts/configure-monit-server >> $LOGFILE 2>&1
+echo_and_log "Done..."
+
+echo_and_log "Configure logging..."
+./server-scripts/configure-logging >> $LOGFILE 2>&1
+echo_and_log "Done..."
+
+echo_and_log "Configure firewall and services..."
+./server-scripts/configure-firewall-services >> $LOGFILE 2>&1
+echo_and_log "Done..."
