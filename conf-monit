@@ -5,8 +5,11 @@
 #Group 3: Austin Elkins, Alyssa Herrman, Lisa Stock
 
 # Script to configure monit and syslog on clients
-# Takes ip address of server as argument
-# TO DO - bash check for argument
+
+#   Takes ip address of server as first argument
+#   Takes ip address of self as second argument
+
+# TO DO - bash check for arguments
 #       - syslog config
 
 # Installations
