@@ -32,10 +32,7 @@ sed -i 's/    allow localhost/    allow 0.0.0.0\/0.0.0.0/' /etc/monitrc
 echo "###############################################################################" >> /etc/monitrc
 echo "## Group 3 Project 3 Configs" >> /etc/monitrc
 echo "###############################################################################" >> /etc/monitrc
-echo "   check process syslogd with pidfile /var/run/syslogd.pid" >> /etc/monitrc
-echo "     start program  "/usr/bin/systemctl start rsyslog"" >> /etc/monitrc                      # <---- TEST FOR SYNTAX
-echo "     stop program  "/usr/bin/systemctl stop rsyslog"" >> /etc/monitrc
-echo "     if 5 restarts within 5 cycles then timeout" >> /etc/monitrc
+
 echo "      " >> /etc/monitrc
 echo "   check process sshd with pidfile /var/run/sshd.pid" >> /etc/monitrc
 echo "     start program  "/usr/bin/systemctl start sshd"" >> /etc/monitrc                     # <---- TEST FOR SYNTAX
@@ -64,6 +61,7 @@ echo "    if failed port 20048 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 2049 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 389 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 636 timeout 15 seconds then alert" >> /etc/monitrc
+echo "    if failed port 514 timeout 15 seconds then alert" >> /etc/monitrc
 
 systemctl start monit
 # monit reload
