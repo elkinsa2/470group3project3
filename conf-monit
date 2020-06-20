@@ -64,6 +64,8 @@ echo "		 if failed port 2049 timeout 15 seconds then alert" >> /etc/monitrc
 echo "		 if failed port 389 timeout 15 seconds then alert" >> /etc/monitrc
 echo "		 if failed port 636 timeout 15 seconds then alert" >> /etc/monitrc
 
+monit reload
+
 
 # SYSLOG CONFIG
 sed -i 's/#$ModLoad imudp/$ModLoad imudp/' /etc/rsyslog.conf
