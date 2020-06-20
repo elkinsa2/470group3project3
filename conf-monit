@@ -21,7 +21,7 @@ sed -i '/^ set alert lmstock23@gmail.com /a  set alert  root@localhost' /etc/mon
 
 # WEB MONIT - ON FOR TESTING - LIKELY REMOVE FOR SUBMISSION 
 sed -i 's/set httpd port 2812 and/set httpd port 2812   /' /etc/monitrc
-sed -i 's/    allow localhost/ #     allow 0.0.0.0/0.0.0.0/' /etc/monitrc             # BROKEN
+sed -i 's/    allow localhost/ #     allow 0.0.0.0/0.0.0.0/' /etc/monitrc                        # <---- BROKEN ?
 
 # Services - Appended to end of /etc/monitrc
 
@@ -29,12 +29,12 @@ echo "##########################################################################
 echo "## Group 3 Project 3 Configs" >> /etc/monitrc
 echo "###############################################################################" >> /etc/monitrc
 echo "   check process syslogd with pidfile /var/run/syslogd.pid" >> /etc/monitrc
-echo "     start program  "/usr/bin/systemctl start rsyslog"" >> /etc/monitrc
+echo "     start program  "/usr/bin/systemctl start rsyslog"" >> /etc/monitrc                      # <---- TEST FOR SYNTAX
 echo "     stop program  "/usr/bin/systemctl stop rsyslog"" >> /etc/monitrc
 echo "     if 5 restarts within 5 cycles then timeout" >> /etc/monitrc
 echo "      " >> /etc/monitrc
 echo "   check process sshd with pidfile /var/run/sshd.pid" >> /etc/monitrc
-echo "     start program  "/usr/bin/systemctl start sshd"" >> /etc/monitrc
+echo "     start program  "/usr/bin/systemctl start sshd"" >> /etc/monitrc                     # <---- TEST FOR SYNTAX
 echo "     stop program  "/usr/bin/systemctl stop sshd"" >> /etc/monitrc
 echo "     if failed port 22 protocol ssh then restart" >> /etc/monitrc
 echo " " >> /etc/monitrc
