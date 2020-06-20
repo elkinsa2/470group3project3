@@ -28,10 +28,10 @@ sed -i 's/    allow localhost/ #     allow 0.0.0.0/0.0.0.0/' /etc/monitrc       
 echo "###############################################################################" >> /etc/monitrc
 echo "## Group 3 Project 3 Configs" >> /etc/monitrc
 echo "###############################################################################" >> /etc/monitrc
-echo "  check process syslogd with pidfile /var/run/syslogd.pid" >> /etc/monitrc
-echo "    start program  "/usr/bin/systemctl start rsyslog"" >> /etc/monitrc
-echo "    stop program  "/usr/bin/systemctl stop rsyslog"" >> /etc/monitrc
-echo "    if 5 restarts within 5 cycles then timeout" >> /etc/monitrc
+echo "   check process syslogd with pidfile /var/run/syslogd.pid" >> /etc/monitrc
+echo "     start program  "/usr/bin/systemctl start rsyslog"" >> /etc/monitrc
+echo "     stop program  "/usr/bin/systemctl stop rsyslog"" >> /etc/monitrc
+echo "     if 5 restarts within 5 cycles then timeout" >> /etc/monitrc
 echo "      " >> /etc/monitrc
 echo "   check process sshd with pidfile /var/run/sshd.pid" >> /etc/monitrc
 echo "     start program  "/usr/bin/systemctl start sshd"" >> /etc/monitrc
