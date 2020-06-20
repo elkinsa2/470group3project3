@@ -5,8 +5,8 @@
 #Group 3: Austin Elkins, Alyssa Herrman, Lisa Stock
 
 # Script to configure monit and syslog on clients
-
-# TO DO - ADD ARGUMENT :O
+# Takes ip address of server as argument
+# TO DO - bash check for argument
 
 # Installations
 yum install epel-release -y
@@ -21,7 +21,7 @@ sed -i '/^ set alert lmstock23@gmail.com /a  set alert  root@localhost' /etc/mon
 
 # WEB MONIT - ON FOR TESTING - LIKELY REMOVE FOR SUBMISSION 
 sed -i 's/set httpd port 2812 and/set httpd port 2812   /' /etc/monitrc
-sed -i 's/    allow localhost/ #     allow 0.0.0.0/0.0.0.0/' /etc/monitrc                        # <---- BROKEN ?
+sed -i 's/    allow localhost/    allow 0.0.0.0\/0.0.0.0/' /etc/monitrc
 
 # Services - Appended to end of /etc/monitrc
 
@@ -56,7 +56,7 @@ echo "    " >> /etc/monitrc
 echo "   check filesystem homefs with path /dev/sda4" >> /etc/monitrc
 echo "     if space usage > 80% for 5 times within 15 cycles then alert  " >> /etc/monitrc
 echo "     " >> /etc/monitrc
-echo "  check host stockl1Server.hh.nku.edu with address 10.2.7.12" >> /etc/monitrc
+echo "  check host stockl1Server.hh.nku.edu with address $1" >> /etc/monitrc
 echo "    if failed ping then alert" >> /etc/monitrc
 echo "    if failed port 111 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 20048 timeout 15 seconds then alert" >> /etc/monitrc
@@ -65,7 +65,7 @@ echo "    if failed port 389 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 636 timeout 15 seconds then alert" >> /etc/monitrc
 
 systemctl start monit
- # monit reload
+# monit reload
 
 # Opens Monit web console ports
 firewall-cmd --zone=public --add-port=2812/udp --permanent
