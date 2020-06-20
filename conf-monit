@@ -14,9 +14,9 @@ yum install monit -y
 
 # MONIT CONFIG
 # Global - leaving set configs inline
-sed '/^set log syslog/a set logfile syslog facility log_daemon' /etc/monitrc
+sed -i '/^set log syslog/a set logfile syslog facility log_daemon' /etc/monitrc
 sed -i 's/# set mailserver mail.bar.baz,/	 set mailserver 127.0.0.1/' /etc/monitrc 
-sed '/^# set alert sysadm@foo.bar/a  set alert root@localhost' /etc/monitrc	
+sed -i '/^# set alert sysadm@foo.bar/a  set alert root@localhost' /etc/monitrc	
 sed -i 's/# set alert sysadm@foo.bar/ set alert lmstock23@gmail.com /' /etc/monitrc 
 
 # WEB MONIT - ON FOR TESTING - LIKELY REMOVE FOR SUBMISSION 
