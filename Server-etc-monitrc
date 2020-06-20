@@ -4,18 +4,9 @@
 # Group 3: Austin Elkins, Alyssa Herrman, Lisa Stock
 
 # TO DO
-# Your solution must monitor your team server VM for the following services:
-# make sure all services are configured 
-# change ip at line "set httpd port 2812" to group server .72
-
-# x ssh
-# x syslog
-# x LDAP
-# x NFS
-# x Apache (httpd)
+# This config would like a testing script ran against it
 
 
-v file start v
 ###############################################################################
 ## Monit control file
 ###############################################################################
@@ -42,7 +33,6 @@ set daemon  30              # check services at 30 seconds intervals
 ## Set syslog logging. If you want to log to a standalone log file instead,
 ## specify the full path to the log file
 #
-   set log syslog
    set logfile syslog facility log_daemon
 #
 #
@@ -157,7 +147,7 @@ set daemon  30              # check services at 30 seconds intervals
 ## events by using a filter as in the second example below.
 #
  set alert lmstock23@gmail.com                       # receive all alerts
- set alert root@localhost                            # emails Lisa and root@localhost
+ set alert root@localhost
  
 ## Do not alert when Monit starts, stops or performs a user initiated action.
 ## This filter is recommended to avoid getting alerts for trivial cases.
@@ -174,9 +164,9 @@ set daemon  30              # check services at 30 seconds intervals
 ## enable SSL for the HTTP interface.
 #
 set httpd port 2812
-    use address 10.2.7.12  # only accept connection from localhost (drop if you use M/Monit)           <--- change ip ------
-#     allow localhost        # allow localhost to connect to the server and    <--open to netx browser
-      allow admin:monit      # require user 'admin' with password 'monit'
+    use address 10.2.7.72  # only accept connection from localhost (drop if you use M/Monit)
+    allow 0.0.0.0/0.0.0.0        # allow localhost to connect to the server and
+    allow admin:monit      # require user 'admin' with password 'monit'
     #with ssl {            # enable SSL/TLS and set path to server certificate
     #    pemfile: /etc/ssl/certs/monit.pem
     #}
@@ -238,39 +228,6 @@ set httpd port 2812
 #    depends on apache_bin
 #    group server
 #
-
-# Monit SYSLOG Server Monitoring
-  check process syslogd with pidfile /var/run/syslogd.pid
-      start program = "/usr/bin/systemctl start rsyslog"
-      stop program = "/usr/bin/systemctl stop rsyslog"
-      if 5 restarts within 5 cycles then timeout
-     
-# Monit SSHD Server Monitoring
-  check process sshd with pidfile /var/run/sshd.pid
-      start program  "/usr/bin/systemctl start sshd"
-      stop program  "/usr/bin/systemctl stop sshd"
-      if failed port 22 protocol ssh then restart
-   
-# Monit HTTPD Server Monitoring
-  check process httpd with pidfile /var/run/httpd/httpd.pid
-      start program = "/usr/bin/systemctl start httpd" with timeout 60 seconds           <------not working
-      stop program  = "/usr/bin/systemctl stop httpd"                                    <------bad apache config on test vm
-      if failed host 10.2.7.12 port 80 protocol http then restart
-      if 5 restarts within 5 cycles then timeout
-       
-# Monit NFS Server Monitoring
-   check process nfs with pidfile /var/run/rpc.statd.pid
-  	   start program = "/usr/bin/systemctl start nfs-server"
-  	   stop program  = "/usr/bin/systemctl stop nfs-server"
-  	   if failed host 10.2.7.12 port 2049 type tcp for 2 cycles then restart
-  	   if 2 restarts within 3 cycles then unmonitor
-    
-# Monit LDAP Server Monitoring
-   check process slapd with pidfile /var/run/openldap/slapd.pid
-      start program = "/usr/bin/systemctl start slapd"
-      stop program = "/usr/bin/systemctl stop slapd"
-      if failed host 10.2.7.12 port 389 protocol ldap3 then restart
- 
 #
 ## Check filesystem permissions, uid, gid, space usage, inode usage and disk I/O.
 ## Other services, such as databases, may depend on this resource and an automatically
@@ -321,8 +278,6 @@ set httpd port 2812
 ## content of a response from a web server. Up to three pings are sent and
 ## connection to a port and an application level network check is performed.
 #
-#  check host myserver with address 192.168.1.1
-#    if failed ping then alert
 #    if failed port 3306 protocol mysql with timeout 15 seconds then alert
 #    if failed port 80 protocol http
 #       and request /some/path with content = "a string"
@@ -355,3 +310,57 @@ set httpd port 2812
 #
 include /etc/monit.d/*
 #
+###############################################################################
+## Group 3 Project 3 Configs
+###############################################################################
+
+  check process syslogd with pidfile /var/run/syslogd.pid
+      start program  "/usr/bin/systemctl start rsyslog"
+      stop program  "/usr/bin/systemctl stop rsyslog"
+      if 5 restarts within 5 cycles then timeout
+      
+   check process sshd with pidfile /var/run/sshd.pid
+       start program  "/usr/bin/systemctl start sshd"
+       stop program  "/usr/bin/systemctl stop sshd"
+       if failed port 22 protocol ssh then restart
+       
+   check process httpd with pidfile /var/run/httpd/httpd.pid
+       start program = "/usr/bin/systemctl start httpd" with timeout 60 seconds
+       stop program  = "/usr/bin/systemctl stop httpd"
+       if failed host 10.2.7.72 port 80 protocol http then restart
+       if 5 restarts within 5 cycles then timeout
+       
+   check process nfs with pidfile /var/run/rpc.statd.pid
+  	   start program = "/usr/bin/systemctl start nfs-server"
+  	   stop program  = "/usr/bin/systemctl stop nfs-server"
+  	   if failed host 10.2.7.72 port 2049 type tcp for 2 cycles then restart
+  	   if 2 restarts within 3 cycles then unmonitor
+         
+   check process slapd with pidfile /var/run/openldap/slapd.pid
+       start program = "/usr/bin/systemctl start slapd"
+       stop program = "/usr/bin/systemctl stop slapd"
+       if failed host 10.2.7.72 port 389 protocol ldap3 then restart
+
+   check system localhost
+      if loadavg (5min) > 3 for 4 cycles then alert
+      if loadavg (15min) > 1 for 4 cycles then alert
+      if memory usage > 80% for 4 cycles then alert
+      if swap usage > 20% for 4 cycles then alert
+      if cpu usage (user) > 80% for 4 cycles then alert
+      if cpu usage (system) > 20% for 4 cycles then alert
+      if cpu usage (wait) > 20% for 4 cycles then alert
+
+   check filesystem /root with path /dev/sda1
+     if space usage > 80% for 5 times within 15 cycles then alert
+     
+   check filesystem /var with path /dev/sda2
+     if space usage > 80% for 5 times within 15 cycles then alert
+    
+   check filesystem /home with path /dev/sda4
+     if space usage > 80% for 5 times within 15 cycles then alert  
+     
+   check host stockl1Client.hh.nku.edu with address 10.2.7.35
+     if failed ping then alert
+     
+   check host stockl1-client with address 10.2.7.58
+     if failed ping then alert
