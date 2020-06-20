@@ -39,7 +39,7 @@ echo "     start program  "/usr/bin/systemctl start sshd"" >> /etc/monitrc      
 echo "     stop program  "/usr/bin/systemctl stop sshd"" >> /etc/monitrc
 echo "     if failed port 22 protocol ssh then restart" >> /etc/monitrc
 echo " " >> /etc/monitrc
-echo "   check system localhost" >> /etc/monitrc
+echo "   check system $2" >> /etc/monitrc
 echo "     if loadavg (5min) > 3 for 4 cycles then alert" >> /etc/monitrc
 echo "     if loadavg (15min) > 1 for 4 cycles then alert" >> /etc/monitrc
 echo "     if memory usage > 80% for 4 cycles then alert" >> /etc/monitrc
