@@ -38,8 +38,8 @@ echo "##########################################################################
 
 echo "" >> /etc/monitrc
 echo "   check process sshd with pidfile /var/run/sshd.pid" >> /etc/monitrc
-echo "     start program  "/usr/bin/systemctl start sshd"" >> /etc/monitrc                     # <---- TEST FOR SYNTAX
-echo "     stop program  "/usr/bin/systemctl stop sshd"" >> /etc/monitrc
+echo "     start program  = "/usr/bin/systemctl start sshd"" >> /etc/monitrc                     # <---- TEST FOR SYNTAX
+echo "     stop program  = "/usr/bin/systemctl stop sshd"" >> /etc/monitrc
 echo "     if failed port 22 protocol ssh then restart" >> /etc/monitrc
 echo "" >> /etc/monitrc
 echo "   check system $2" >> /etc/monitrc
