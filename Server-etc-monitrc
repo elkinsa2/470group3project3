@@ -353,13 +353,13 @@ include /etc/monit.d/*
       if cpu usage (system) > 20% for 4 cycles then alert
       if cpu usage (wait) > 20% for 4 cycles then alert
 
-   check filesystem /root with path /dev/sda1
+   check filesystem root with path /dev/sda1
      if space usage > 80% for 5 times within 15 cycles then alert
      
-   check filesystem /var with path /dev/sda2
+   check filesystem var with path /dev/sda2
      if space usage > 80% for 5 times within 15 cycles then alert
     
-   check filesystem /home with path /dev/sda4
+   check filesystem home with path /dev/sda4
      if space usage > 80% for 5 times within 15 cycles then alert  
      
    check host stockl1Client.hh.nku.edu with address 10.2.7.35
