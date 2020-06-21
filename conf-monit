@@ -72,18 +72,15 @@ echo "    if failed port 111 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 20048 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 2049 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 389 timeout 15 seconds then alert" >> /etc/monitrc
-echo "    if failed port 514 timeout 15 seconds then alert" >> /etc/monitrc
-  
+echo "    if failed port 514 timeout 15 seconds then alert" >> /etc/monitrc 
 
 /usr/bin/systemctl start monit
 /usr/bin/systemctl enable monit
-
 
 # Opens Monit web console ports
 firewall-cmd --zone=public --add-port=2812/udp --permanent
 firewall-cmd --zone=public --add-port=2812/tcp --permanent
 firewall-cmd --reload
-
 
 # SYSLOG CONFIG
 sed -i 's/#$ModLoad imudp/$ModLoad imudp/' /etc/rsyslog.conf
@@ -91,12 +88,13 @@ sed -i 's/#$UDPServerRun 514/$UDPServerRun 514/' /etc/rsyslog.conf
 sed -i 's/#$ModLoad imtcp/$ModLoad imtcp/' /etc/rsyslog.conf
 sed -i 's/#$InputTCPServerRun 514/$InputTCPServerRun 514/' /etc/rsyslog.conf
 
-sed -i '/$ local7.* /a syslog.*                                                /var/log/syslog.log' /etc/monitrc  #--duplicates if reran
-
 # Opens Syslog and mail ports
 firewall-cmd --zone=public --add-port=514/udp --permanent
 firewall-cmd --zone=public --add-port=514/tcp --permanent
 firewall-cmd --zone=public --add-port=25/udp --permanent
 firewall-cmd --zone=public --add-port=25/tcp --permanent
 firewall-cmd --reload
+
+sed -i '/^local7.* /a syslog.*                                                \/var\/log\/syslog.log' /etc/rsyslog.conf  #--duplicates if reran
+sed -i 's/#*.* @@remote-host:514/ *.* @@10.2.7.72:514/' /etc/rsyslog.conf
 
