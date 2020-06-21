@@ -77,7 +77,8 @@ echo "    if failed port 514 timeout 15 seconds then alert" >> /etc/monitrc
   
 
 /usr/bin/systemctl start monit
-# monit reload
+/usr/bin/systemctl enable monit
+
 
 # Opens Monit web console ports
 firewall-cmd --zone=public --add-port=2812/udp --permanent
