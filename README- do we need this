@@ -5,7 +5,62 @@ Group 3: Austin Elkins, Alyssa Herrman, Lisa Stock
 # Instructions for running conf-monit
 # Instrtuctions for running test script
 
-           --------------
-==========| IN PROGRESS  |=====================
-           --------------
+# Informational
+
+- this solution provides notifications to email (set additional email addresses to line 154 of /etc/monitrc), syslog, and the Monit Service Manager console at 10.2.7.72:2812.
+         
+----- The SERVER VM monitors itself using the following checks:
+
+  --- SYSTEM 
+  
+  - Alert to load average greater than 3 for 4 cycles for 5 minutes.
+  - Alert to load average greater than 1 for 4 cycles for 15 minutes.
+  - Alert to memory usage greater than 80% for 4 cycles.
+  - Alert to swap usage greater than 20% for 4 cycles.
+  - Alert to cpu user usage greater than 80% for 4 cycles.
+  - Alert to cpu system usage greater than 20% for 4 cycles.
+  - Alert to cpu wait time greater than 20% for 4 cycles.
+  
+  --- PROCESSES
+  - Alert to syslog process down for 30 seconds and will attempt to restart service.
+  - Alert to ssh process down or failed port 22 for 30 seconds and will attempt to restart service.
+  - Alert to httpd process down or failed port 80 for 30 seconds and will attempt to restart service.
+  - Alert to nfs process down or failed port 2049 for 30 seconds and will attempt to restart service.
+  - Alert to slapd (ldap) process down or failed port 389 for 30 seconds and will attempt to restart service.
+  
+  --- FILESYSTEM
+  - Alert to filesystem /root at /dev/sda1 greater than 80% capacity.
+  - Alert to filesystem /var at /dev/sda2 greater than 80% capacity.
+  - Alert to filesystem /home at /dev/sda4 greater than 80% capacity.
+  
+----- The SERVER VM monitors CLIENTS using the following checks:
+  --- CLIENTS
+  
+  - Alert to failed ICMP pings to configured clients. (Additional clients can be configured after line 369 at /etc/monitrc)
+  
+  
+  
+  
+ ----- Any CLIENT VMs configured with the conf-monit script will monitor itself using the following checks:
+  
+   --- SYSTEM 
+  - Alert to load average greater than 3 for 4 cycles for 5 minutes.
+  - Alert to load average greater than 1 for 4 cycles for 15 minutes.
+  - Alert to memory usage greater than 80% for 4 cycles.
+  - Alert to swap usage greater than 20% for 4 cycles.
+  - Alert to cpu user usage greater than 80% for 4 cycles.
+  - Alert to cpu system usage greater than 20% for 4 cycles.
+  - Alert to cpu wait time greater than 20% for 4 cycles.
+         
+  --- PROCESSES
+  - Alert to syslog process down for 30 seconds and will attempt to restart service.
+  - Alert to ssh process down or failed port 22 for 30 seconds and will attempt to restart service.
+         
+  --- FILESYSTEM
+  - Alert to filesystem /root at /dev/sda1 greater than 80% capacity.
+  - Alert to filesystem /var at /dev/sda2 greater than 80% capacity.
+     
+  --- SERVER SERVICES
+  - The CLIENT VMs will monitor the SERVER services for syslog, ldap, and nfs through TCP pings to thier respective common port numbers and alert if failed.
+         
 
