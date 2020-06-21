@@ -65,7 +65,7 @@ echo "   check filesystem varfs with path /dev/sda3" >> /etc/monitrc
 echo "     if space usage > 80% for 5 times within 15 cycles then alert" >> /etc/monitrc
 
 echo "" >> /etc/monitrc
-echo "  check host Group-3-Server with address $10.2.7.72" >> /etc/monitrc
+echo "  check host Group-3-Server with address 10.2.7.72" >> /etc/monitrc
 echo "    if failed ping then alert" >> /etc/monitrc
 echo "    if failed port 111 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 20048 timeout 15 seconds then alert" >> /etc/monitrc
