@@ -6,11 +6,10 @@
 
 # Script to configure monit and syslog on clients
 
-#   Takes ip address of server as first argument
-#   Takes ip address of self as second argument
+# Takes ip address of self as argument
 
 # TO DO - bash check for arguments
-#       - syslog config
+
 
 # Installations
 yum install epel-release -y
@@ -26,8 +25,8 @@ sed -i 's/# set mailserver mail.bar.baz,/  set mailserver 127.0.0.1/' /etc/monit
 sed -i 's/# set alert sysadm@foo.bar/ set alert lmstock23@gmail.com /' /etc/monitrc 
 sed -i '/^ set alert lmstock23@gmail.com /a  set alert  root@localhost' /etc/monitrc  #--duplicates if reran
 
-# WEB MONIT - ON FOR TESTING - LIKELY REMOVE FOR SUBMISSION 
-sed -i 's/    use address localhost/    use address '$2'/' /etc/monitrc
+# WEB MONIT - 
+sed -i 's/    use address localhost/    use address '$1'/' /etc/monitrc
 sed -i 's/    allow localhost/    allow 0.0.0.0\/0.0.0.0 /' /etc/monitrc
 
 # Services - Appended to end of /etc/monitrc
@@ -48,7 +47,7 @@ echo "     start program  = \"/usr/bin/systemctl start rsyslog\"" >> /etc/monitr
 echo "     stop program  = \"/usr/bin/systemctl stop rsyslog\"" >> /etc/monitrc
 
 echo "" >> /etc/monitrc
-echo "   check system $2" >> /etc/monitrc
+echo "   check system $1" >> /etc/monitrc
 echo "     if loadavg (5min) > 3 for 4 cycles then alert" >> /etc/monitrc
 echo "     if loadavg (15min) > 1 for 4 cycles then alert" >> /etc/monitrc
 echo "     if memory usage > 80% for 4 cycles then alert" >> /etc/monitrc
@@ -66,7 +65,7 @@ echo "   check filesystem varfs with path /dev/sda3" >> /etc/monitrc
 echo "     if space usage > 80% for 5 times within 15 cycles then alert" >> /etc/monitrc
 
 echo "" >> /etc/monitrc
-echo "  check host stockl1Server.hh.nku.edu with address $1" >> /etc/monitrc
+echo "  check host Group-3-Server with address $10.2.7.72" >> /etc/monitrc
 echo "    if failed ping then alert" >> /etc/monitrc
 echo "    if failed port 111 timeout 15 seconds then alert" >> /etc/monitrc
 echo "    if failed port 20048 timeout 15 seconds then alert" >> /etc/monitrc
