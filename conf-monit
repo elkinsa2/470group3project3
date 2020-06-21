@@ -93,6 +93,7 @@ sed -i 's/#$InputTCPServerRun 514/$InputTCPServerRun 514/' /etc/rsyslog.conf
 
 # Opens Syslog and mail ports
 firewall-cmd --zone=public --add-port=514/udp --permanent
+firewall-cmd --zone=public --add-port=514/tcp --permanent
 firewall-cmd --zone=public --add-port=25/udp --permanent
 firewall-cmd --zone=public --add-port=25/tcp --permanent
 firewall-cmd --reload
