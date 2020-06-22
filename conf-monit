@@ -102,6 +102,8 @@ firewall-cmd --reload
 sed -i '/^local7.* /a syslog.*                                                \/var\/log\/syslog.log' /etc/rsyslog.conf  #--duplicates if reran
 sed -i 's/#*.* @@remote-host:514/ *.* @@10.2.7.72:514/' /etc/rsyslog.conf
 
+/usr/bin/systemctl restart rsyslog
+
 echo "Configuration completed" | tee -a /root/conf-monit-log.txt
 
 
