@@ -11,7 +11,7 @@
 
 
 ###############################################################################
-## Monit control file
+## Monit control file .72
 ###############################################################################
 ##
 ## Comments begin with a '#' and extend through the end of the line. Keywords
@@ -36,7 +36,7 @@ set daemon  30              # check services at 30 seconds intervals
 ## Set syslog logging. If you want to log to a standalone log file instead,
 ## specify the full path to the log file
 #
-   set logfile syslog facility log_daemon
+set logfile syslog facility log_daemon
 #
 #
 ## Set the location of the Monit lock file which stores the process id of the
@@ -88,7 +88,7 @@ set daemon  30              # check services at 30 seconds intervals
 # will use the second mail server in the list and so on. By default Monit uses
 # port 25 - it is possible to override this with the PORT option.
 #
-  set mailserver 127.0.0.1                   # primary mailserver
+  set mailserver 127.0.0.1    # primary mailserver
 #                backup.bar.baz port 10025,  # backup mailserver on port 10025
 #                localhost                   # fallback relay
 #
@@ -117,8 +117,8 @@ set daemon  30              # check services at 30 seconds intervals
 ## adding the timeout option.
 #
 # set mmonit http://monit:monit@192.168.1.10:8080/collector
-#      with timeout 30 seconds              # Default timeout is 5 seconds
-#      and register without credentials     # Don't register credentials
+#     # with timeout 30 seconds              # Default timeout is 5 seconds
+#     # and register without credentials     # Don't register credentials
 #
 #
 ## Monit by default uses the following format for alerts if the mail-format
@@ -149,13 +149,13 @@ set daemon  30              # check services at 30 seconds intervals
 ## service defined in this file has errors. Alerts may be restricted on
 ## events by using a filter as in the second example below.
 #
- set alert lmstock23@gmail.com                       # receive all alerts
- set alert root@localhost
- 
+  set alert lmstock23@gmail.com                      # receive all alerts
+  set alert root@localhost
+#
 ## Do not alert when Monit starts, stops or performs a user initiated action.
 ## This filter is recommended to avoid getting alerts for trivial cases.
 #
-#  set alert root@localhost not on { instance, action }
+# set alert your-name@your.domain not on { instance, action }
 #
 #
 ## Monit has an embedded HTTP interface which can be used to view status of
@@ -168,7 +168,7 @@ set daemon  30              # check services at 30 seconds intervals
 #
 set httpd port 2812
     use address 10.2.7.72  # only accept connection from localhost (drop if you use M/Monit)
-    allow 0.0.0.0/0.0.0.0        # allow localhost to connect to the server and
+    allow 0.0.0.0/0.0.0.0  # allow localhost to connect to the server and
     allow admin:monit      # require user 'admin' with password 'monit'
     #with ssl {            # enable SSL/TLS and set path to server certificate
     #    pemfile: /etc/ssl/certs/monit.pem
@@ -281,6 +281,8 @@ set httpd port 2812
 ## content of a response from a web server. Up to three pings are sent and
 ## connection to a port and an application level network check is performed.
 #
+#  check host myserver with address 192.168.1.1
+#    if failed ping then alert
 #    if failed port 3306 protocol mysql with timeout 15 seconds then alert
 #    if failed port 80 protocol http
 #       and request /some/path with content = "a string"
@@ -344,7 +346,7 @@ include /etc/monit.d/*
        stop program = "/usr/bin/systemctl stop slapd"
        if failed host 10.2.7.72 port 389 protocol ldap3 then restart
 
-   check system localhost
+   check system 10.2.7.72
       if loadavg (5min) > 3 for 4 cycles then alert
       if loadavg (15min) > 1 for 4 cycles then alert
       if memory usage > 80% for 4 cycles then alert
@@ -362,8 +364,15 @@ include /etc/monit.d/*
    check filesystem home with path /dev/sda4
      if space usage > 80% for 5 times within 15 cycles then alert  
      
-   check host stockl1Client.hh.nku.edu with address 10.2.7.35
+   check host stockl1-client1 with address 10.2.7.35
      if failed ping then alert
      
-   check host stockl1-client with address 10.2.7.58
+   check host stockl1-client2 with address 10.2.7.58
      if failed ping then alert
+     
+   check host group3client1 with address 10.2.7.77
+     if failed ping then alert
+     
+   check host group3client2 with address 10.2.7.82
+     if failed ping then alert
+
