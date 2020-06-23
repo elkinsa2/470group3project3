@@ -3,7 +3,7 @@ Darci Guriel
 Group 3: Austin Elkins, Alyssa Herrman, Lisa Stock
 
 # Instructions for running conf-monit
-    1. download compressed file from Canvas submission [INSERT GIT ZIP LINK]
+    1. download compressed tar from Canvas submission wget https://raw.githubusercontent.com/lmstock/470group3project3/master/a3.tar.bz2
     2. extract with tar xjf a3.tar.bz3
     3. chmod 744 conf-monit
     4. run ./conf-monit 10.2.x.x (using the ipv4 address of the machine receiving the configuration)
