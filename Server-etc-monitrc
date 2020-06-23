@@ -6,9 +6,6 @@
 # NOTE: Global configs are inline in Global section
 #       Group 3 Configs bundled at end of file
 
-# TO DO
-# This config would like a testing script ran against it
-
 
 ###############################################################################
 ## Monit control file .72
