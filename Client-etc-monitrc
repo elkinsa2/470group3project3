@@ -11,7 +11,7 @@ this is just the end result, update before submission
 
 
 ###############################################################################
-## Monit control file
+## Monit control file  
 ###############################################################################
 ##
 ## Comments begin with a '#' and extend through the end of the line. Keywords
@@ -168,7 +168,7 @@ set alert  root@localhost
 ## enable SSL for the HTTP interface.
 #
 set httpd port 2812 and
-    use address 10.2.7.35  # only accept connection from localhost (drop if you use M/Monit)
+    use address 10.2.7.58  # only accept connection from localhost (drop if you use M/Monit)
     allow 0.0.0.0/0.0.0.0         # allow localhost to connect to the server and
     allow admin:monit      # require user 'admin' with password 'monit'
     #with ssl {            # enable SSL/TLS and set path to server certificate
@@ -329,7 +329,7 @@ include /etc/monit.d/*
      start program  = "/usr/bin/systemctl start rsyslog"
      stop program  = "/usr/bin/systemctl stop rsyslog"
 
-   check system 10.2.7.35
+   check system 10.2.7.58
      if loadavg (5min) > 3 for 4 cycles then alert
      if loadavg (15min) > 1 for 4 cycles then alert
      if memory usage > 80% for 4 cycles then alert
@@ -344,13 +344,12 @@ include /etc/monit.d/*
    check filesystem varfs with path /dev/sda3
      if space usage > 80% for 5 times within 15 cycles then alert
 
-  check host stockl1Server.hh.nku.edu with address 10.2.7.12
+  check host Group-3-Server with address 10.2.7.72
     if failed ping then alert
     if failed port 111 timeout 15 seconds then alert
     if failed port 20048 timeout 15 seconds then alert
     if failed port 2049 timeout 15 seconds then alert
     if failed port 389 timeout 15 seconds then alert
-    if failed port 636 timeout 15 seconds then alert
     if failed port 514 timeout 15 seconds then alert
 
 
