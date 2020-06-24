@@ -1,0 +1,68 @@
+#!/bin/bash
+
+#CIT 470-001 Project 3
+#Darci Guriel
+#Group 3: Austin Elkins, Alyssa Herrman, Lisa Stock
+
+yum install stress -y
+
+echo "Testing ssh"
+systemctl stop sshd
+sleep 150
+echo "Logs generated from ssh failure:"
+monit summary | grep sshd
+echo "End of ssh logs"
+systemctl start sshd
+
+
+echo "Testing syslog"
+systemctl stop rsyslog
+sleep 150
+echo "Logs generated from syslog failure:"
+monit summary | grep syslogd
+echo "End of rsyslog logs"
+systemctl start rsyslog
+
+echo "testing LDAP"
+systemctl stop slapd
+sleep 150
+echo "Logs generated from LDAP failure:"
+monit summary | grep slapd
+echo "End of LDAP logs"
+systemctl start slapd
+
+echo "Testing NFS"
+systemctl stop nfs-server
+sleep 150
+echo "Logs generated from NFS failure:"
+monit summary | grep nfs
+echo "End of NFS logs"
+systemctl start nfs-server
+
+echo "Testing Apache"
+systemctl stop httpd
+sleep 150
+echo "Logs generated from Apache failure:"
+monit summary | grep httpd
+echo "End of Apache logs"
+systemctl start httpd
+
+echo "Testing Hard drive capacity"
+dd if=/dev/zero of=/home/zero bs=1M count=2000 oflag=append conv=notrunc
+sleep 150
+echo "Logs generated from High disk usage"
+monit summary | grep root
+monit summary | grep var
+monit summary | grep home
+echo "End of Hard drive capacity logs"
+rm /home/zero
+
+echo "Testing memory and cpu"
+stress -c 50 --vm 3 --vm-bytes 1024M --timemout 150s
+sleep 90
+echo "Logs generated from High memory and CPU usage"
+monit summary | grep system
+echo "End of memory and cpu usage logs"
+
+echo "Monit testing is now finished."
+echo "If no logs were generated for a service, then that service failure wasn't noticed by monit."
